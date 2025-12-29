@@ -77,8 +77,6 @@ const MainContent: React.FC = () => {
       try {
         await navigator.share({
           files: [file],
-          title: 'Mon Lion Meme',
-          text: 'Regarde le meme que j\'ai créé !',
         });
       } catch (error) {
         console.error('Erreur lors du partage:', error);
