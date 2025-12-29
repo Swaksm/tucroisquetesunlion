@@ -10,3 +10,6 @@ export interface MemeData {
   userImageUrl: string | null;
   text: string;
 }
+
+export type AspectRatio = 'square' | 'rectangle';
+

@@ -15,4 +15,5 @@ export const PREDEFINED_LIONS: LionOption[] = [
 ];
 
 export const CANVAS_WIDTH = 1024;
-export const CANVAS_HEIGHT = 512;
+export const CANVAS_SQUARE_HEIGHT = 1024;
+export const CANVAS_RECT_HEIGHT = 512;

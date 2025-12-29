@@ -9,6 +9,7 @@ import LegalNotice from './components/LegalNotice';
 type Page = 'main' | 'privacy' | 'legal';
 
 const MainContent: React.FC = () => {
+  const [aspectRatio, setAspectRatio] = useState<'square' | 'rectangle'>('square');
   const [selectedLion, setSelectedLion] = useState(PREDEFINED_LIONS[0].url);
   const [customLionUrl, setCustomLionUrl] = useState<string | null>(null);
   const [userImageUrl, setUserImageUrl] = useState<string | null>(null);
@@ -95,11 +96,33 @@ const MainContent: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
         {/* Left Column: Controls */}
         <div className="space-y-8">
-          
-          {/* Step 1: Choose Lion */}
+
+          {/* Step 1: Format */}
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
+              <h2 className="text-xl font-bold uppercase tracking-tight">Choisis le format</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setAspectRatio('square')}
+                className={`py-3 px-4 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${aspectRatio === 'square' ? 'bg-orange-500 text-white' : 'bg-zinc-800 hover:bg-zinc-700'}`}
+              >
+                Carré
+              </button>
+              <button
+                onClick={() => setAspectRatio('rectangle')}
+                className={`py-3 px-4 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${aspectRatio === 'rectangle' ? 'bg-orange-500 text-white' : 'bg-zinc-800 hover:bg-zinc-700'}`}
+              >
+                Rectangle
+              </button>
+            </div>
+          </section>
+          
+          {/* Step 2: Choose Lion */}
+          <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
               <h2 className="text-xl font-bold uppercase tracking-tight">Choisis ton Lion</h2>
             </div>
             <div className="grid grid-cols-3 gap-3">
@@ -157,10 +180,10 @@ const MainContent: React.FC = () => {
             </div>
           </section>
 
-          {/* Step 2: Upload User Image */}
+          {/* Step 3: Upload User Image */}
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
+              <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span>
               <h2 className="text-xl font-bold uppercase tracking-tight">Ta "vraie" nature</h2>
             </div>
             <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-zinc-700 rounded-xl cursor-pointer hover:border-zinc-500 hover:bg-zinc-800/50 transition-all overflow-hidden relative">
@@ -179,10 +202,10 @@ const MainContent: React.FC = () => {
             </label>
           </section>
 
-          {/* Step 3: Text input & Action */}
+          {/* Step 4: Text input & Action */}
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
-              <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span>
+              <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span>
               <h2 className="text-xl font-bold uppercase tracking-tight">L'élément textuel</h2>
             </div>
             <input
@@ -214,7 +237,7 @@ const MainContent: React.FC = () => {
           <section className={`bg-zinc-900 p-6 rounded-2xl border transition-all duration-500 ${isGenerated ? 'border-orange-500/50 shadow-[0_0_30px_rgba(249,115,22,0.1)]' : 'border-zinc-800 opacity-60'}`}>
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span>
+                <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span>
                 <h2 className="text-xl font-bold uppercase tracking-tight">Aperçu</h2>
               </div>
               {isGenerated && (
@@ -225,7 +248,8 @@ const MainContent: React.FC = () => {
             </div>
             
             <div className="relative">
-              <MemeCanvas 
+              <MemeCanvas
+                aspectRatio={aspectRatio}
                 lionUrl={selectedLion}
                 userImageUrl={userImageUrl}
                 text={isGenerated ? memeText : "..."}
