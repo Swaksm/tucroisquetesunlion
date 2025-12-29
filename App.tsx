@@ -3,8 +3,12 @@ import React, { useState, useRef } from 'react';
 import { PREDEFINED_LIONS } from './constants';
 import MemeCanvas from './components/MemeCanvas';
 import { Upload, Download, Check, Image as ImageIcon, Type, Rocket, RefreshCw, Plus } from 'lucide-react';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import LegalNotice from './components/LegalNotice';
 
-const App: React.FC = () => {
+type Page = 'main' | 'privacy' | 'legal';
+
+const MainContent: React.FC = () => {
   const [selectedLion, setSelectedLion] = useState(PREDEFINED_LIONS[0].url);
   const [customLionUrl, setCustomLionUrl] = useState<string | null>(null);
   const [userImageUrl, setUserImageUrl] = useState<string | null>(null);
@@ -66,14 +70,7 @@ const App: React.FC = () => {
   const canGenerate = userImageUrl && memeText.trim().length > 0;
 
   return (
-    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center max-w-5xl mx-auto">
-      <header className="text-center mb-12">
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2 italic text-zinc-100">
-          Lion Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-200">Generator</span>
-        </h1>
-        <p className="text-zinc-400 text-lg">"Tu crois que t'es un lion mais t'es un..."</p>
-      </header>
-
+    <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
         {/* Left Column: Controls */}
         <div className="space-y-8">
@@ -248,9 +245,49 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+const App: React.FC = () => {
+  const [page, setPage] = useState<Page>('main');
+
+  const renderContent = () => {
+    switch (page) {
+      case 'privacy':
+        return <PrivacyPolicy onBack={() => setPage('main')} />;
+      case 'legal':
+        return <LegalNotice onBack={() => setPage('main')} />;
+      case 'main':
+      default:
+        return <MainContent />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center max-w-5xl mx-auto">
+      <header className="text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2 italic text-zinc-100">
+          Lion Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-200">Generator</span>
+        </h1>
+        <p className="text-zinc-400 text-lg">"Tu crois que t'es un lion mais t'es un..."</p>
+      </header>
+
+      <main className="w-full">
+        {renderContent()}
+      </main>
 
       <footer className="mt-20 py-8 border-t border-zinc-800 w-full text-center">
-        <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-medium opacity-50">
+        <div className="text-zinc-500 text-xs">
+          <button onClick={() => setPage('privacy')} className="hover:text-zinc-300 transition-colors mx-2">
+            Politique de Confidentialité
+          </button>
+          |
+          <button onClick={() => setPage('legal')} className="hover:text-zinc-300 transition-colors mx-2">
+            Mentions Légales
+          </button>
+        </div>
+        <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-medium opacity-50 mt-4">
           Lion Meme Generator — © 2025
         </p>
       </footer>
