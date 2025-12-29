@@ -1,0 +1,5 @@
+{
+  "name": "Lion Meme Generator",
+  "description": "A high-quality meme creation tool based on the 'Tu crois que t'es un lion mais t'es un...' format. Features side-by-side image combining and custom text overlays.",
+  "requestFramePermissions": []
+}
