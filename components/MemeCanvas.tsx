@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useCallback } from 'react';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../constants';
 
@@ -18,7 +17,6 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, on
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Helper to load image
     const loadImage = (url: string): Promise<HTMLImageElement> => {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -43,7 +41,6 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, on
         const userImg = await loadImage(userImageUrl);
         ctx.drawImage(userImg, CANVAS_WIDTH / 2, 0, CANVAS_WIDTH / 2, CANVAS_HEIGHT);
       } else {
-        // Placeholder background for right side if no image uploaded
         ctx.fillStyle = '#27272a';
         ctx.fillRect(CANVAS_WIDTH / 2, 0, CANVAS_WIDTH / 2, CANVAS_HEIGHT);
         ctx.fillStyle = '#52525b';
@@ -71,6 +68,27 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, on
         ctx.strokeText(line, CANVAS_WIDTH / 2, y);
         ctx.fillText(line, CANVAS_WIDTH / 2, y);
       });
+
+      // --- 4. Filigrane (Watermark) ---
+      const watermarkText = 'lion-meme.com';
+      ctx.save(); // Sauvegarde l'état du contexte
+      ctx.font = 'bold 20px Arial, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'bottom';
+      
+      // Ombre pour la lisibilité
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+      
+      // Couleur blanche semi-transparente
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      
+      // Position : bas à droite avec 20px de marge
+      ctx.fillText(watermarkText, CANVAS_WIDTH - 20, CANVAS_HEIGHT - 20);
+      ctx.restore(); // Restaure l'état
+      // -------------------------------
 
       if (onCanvasRef) {
         onCanvasRef(canvas);
