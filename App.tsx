@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { PREDEFINED_LIONS } from './constants';
 import MemeCanvas from './components/MemeCanvas';
-import { Upload, Download, Check, Image as ImageIcon, Type, Rocket, RefreshCw, Plus } from 'lucide-react';
+import { Upload, Download, Check, Image as ImageIcon, Type, Rocket, RefreshCw, Plus, Share2 } from 'lucide-react';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import LegalNotice from './components/LegalNotice';
 
@@ -67,7 +67,30 @@ const MainContent: React.FC = () => {
     link.click();
   };
 
+  const shareMeme = async () => {
+    if (!canvasRef.current) return;
+    const dataUrl = canvasRef.current.toDataURL('image/png');
+    const blob = await (await fetch(dataUrl)).blob();
+    const file = new File([blob], `lion-meme-${Date.now()}.png`, { type: 'image/png', lastModified: Date.now() });
+
+    if (navigator.share && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: 'Mon Lion Meme',
+          text: 'Regarde le meme que j\'ai créé !',
+        });
+      } catch (error) {
+        console.error('Erreur lors du partage:', error);
+      }
+    } else {
+      // Fallback for browsers that don't support sharing files
+      alert('La fonctionnalité de partage n\'est pas supportée sur ce navigateur.');
+    }
+  };
+
   const canGenerate = userImageUrl && memeText.trim().length > 0;
+  const showShare = 'share' in navigator && 'canShare' in navigator;
 
   return (
     <>
@@ -222,7 +245,7 @@ const MainContent: React.FC = () => {
               )}
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 flex gap-3">
               <button
                 disabled={!isGenerated}
                 onClick={downloadMeme}
@@ -233,11 +256,25 @@ const MainContent: React.FC = () => {
                 }`}
               >
                 <Download size={24} />
-                Télécharger .png
+                Télécharger
               </button>
+              {showShare && (
+                <button
+                  disabled={!isGenerated}
+                  onClick={shareMeme}
+                  className={`w-full font-black text-xl py-4 rounded-xl flex items-center justify-center gap-3 transition-all transform active:scale-95 uppercase tracking-wider ${
+                    isGenerated 
+                    ? 'bg-blue-500 text-white hover:bg-blue-400 shadow-xl' 
+                    : 'bg-zinc-800 text-zinc-600 cursor-not-allowed border border-zinc-700 opacity-50'
+                  }`}
+                >
+                  <Share2 size={24} />
+                  Partager
+                </button>
+              )}
             </div>
           </section>
-
+          
           <div className="mt-8 flex flex-wrap gap-4 opacity-30 justify-center">
             <div className="flex items-center gap-2"><ImageIcon size={14}/> <span className="text-[10px] uppercase font-bold tracking-widest">HQ Canvas</span></div>
             <div className="flex items-center gap-2"><Type size={14}/> <span className="text-[10px] uppercase font-bold tracking-widest">Impact Layer</span></div>
@@ -245,9 +282,20 @@ const MainContent: React.FC = () => {
           </div>
         </div>
       </div>
+      <section className="w-full mt-20 text-zinc-600 text-left">
+        <h2 className="text-2xl font-bold text-zinc-400 mb-4">Comment utiliser notre générateur de lion-meme ?</h2>
+        <p className="mb-4">
+          Libérez votre créativité avec notre <strong>générateur de meme gratuit</strong>. Le concept est simple : une image de lion majestueux, et en dessous, une photo qui révèle une réalité plus... modeste. C'est l'outil parfait pour une touche d'<strong>humour lion</strong> et d'autodérision. Notre <strong>Lion meme maker</strong> vous permet de créer ces memes viraux en quelques clics.
+        </p>
+        <h3 className="text-xl font-bold text-zinc-500 mb-2">Pourquoi le meme du lion est-il si populaire ?</h3>
+        <p>
+          Ce meme joue sur le contraste entre l'image que l'on veut projeter (le lion, symbole de force et de majesté) et la réalité, souvent plus cocasse. C'est un excellent moyen de partager une tranche de vie avec humour. Utilisez notre <strong>générateur de meme gratuit</strong> pour surprendre vos amis !
+        </p>
+      </section>
     </>
   );
 }
+
 
 const App: React.FC = () => {
   const [page, setPage] = useState<Page>('main');
