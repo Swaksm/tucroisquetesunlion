@@ -243,7 +243,7 @@ const MainContent: React.FC = () => {
               )}
             </div>
 
-            <div className="mt-8 flex gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <button
                 disabled={!isGenerated}
                 onClick={downloadMeme}
