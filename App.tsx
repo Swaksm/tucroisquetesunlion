@@ -313,6 +313,13 @@ const MainContent: React.FC = () => {
         <p>
           Ce meme joue sur le contraste entre l'image que l'on veut projeter (le lion, symbole de force et de majesté) et la réalité, souvent plus cocasse. C'est un excellent moyen de partager une tranche de vie avec humour. Utilisez notre <strong>générateur de meme gratuit</strong> pour surprendre vos amis !
         </p>
+        <h3 className="text-xl font-bold text-zinc-500 mt-8 mb-2">Questions fréquentes</h3>
+        <h4 className="font-bold text-zinc-500 mt-4">Comment faire un meme « Tu crois que t'es un lion » ?</h4>
+        <p>Choisis le format, un lion (ou le tien), ajoute la photo de ta « vraie nature » et le texte, puis clique sur « Générer le mème ». Tu peux ensuite le télécharger en PNG ou le partager.</p>
+        <h4 className="font-bold text-zinc-500 mt-4">Le générateur de meme lion est-il gratuit ?</h4>
+        <p>Oui, il est entièrement gratuit et sans inscription.</p>
+        <h4 className="font-bold text-zinc-500 mt-4">Mes photos sont-elles envoyées sur un serveur ?</h4>
+        <p>Non. Le meme est assemblé directement dans ton navigateur : tes images ne quittent jamais ton appareil.</p>
       </section>
     </>
   );
@@ -358,7 +365,12 @@ const App: React.FC = () => {
           </button>
         </div>
         <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-medium opacity-50 mt-4">
-          Lion Meme Generator — © 2025
+          Lion Meme Generator — © 2025-2026
+        </p>
+        <p className="text-zinc-500 text-xs mt-3">
+          Un projet de <a href="https://swaks.org/fr/" className="underline hover:text-zinc-300">Matthieu Izac</a> ·{' '}
+          <a href="https://swaks.org/fr/projects/lion-meme.html" className="underline hover:text-zinc-300">À propos</a> ·{' '}
+          <a href="https://github.com/Swaksm/tucroisquetesunlion" className="underline hover:text-zinc-300" rel="noopener">Code source</a>
         </p>
       </footer>
     </div>

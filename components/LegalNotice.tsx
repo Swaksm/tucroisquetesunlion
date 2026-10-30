@@ -11,15 +11,15 @@ const LegalNotice: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       <div className="space-y-4">
         <h2 className="text-2xl font-bold mt-6 text-white">Éditeur du site</h2>
         <p>
-          Lion Meme Generator
+          Lion Meme Generator, projet personnel de Matthieu Izac, sans statut d'entreprise. Contact : swks.pro@gmail.com.
         </p>
         <p>
-          Ce site est un projet de démonstration et n'a pas de statut d'entreprise.
+          Mentions légales complètes du site : <a href="https://swaks.org/mentions-legales.html" className="underline">swaks.org/mentions-legales.html</a>.
         </p>
 
         <h2 className="text-2xl font-bold mt-6 text-white">Hébergement</h2>
         <p>
-          Ce site est hébergé par Netlify, Inc., situé à 2325 3rd Street, Suite 215, San Francisco, CA 94107, USA.
+          Ce site est hébergé par OVH SAS, 2 rue Kellermann, 59100 Roubaix, France.
         </p>
 
         <h2 className="text-2xl font-bold mt-6 text-white">Propriété intellectuelle</h2>

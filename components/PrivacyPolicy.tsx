@@ -16,6 +16,9 @@ const PrivacyPolicy: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         <p>
           Nous ne collectons aucune information d'identification personnelle sur nos utilisateurs. Les images que vous téléchargez sont traitées dans votre navigateur et ne sont jamais envoyées ou stockées sur nos serveurs.
         </p>
+        <p>
+          Une mesure d'audience anonyme est faite avec Umami : sans cookie, sans donnée personnelle, uniquement des statistiques globales de visite.
+        </p>
         <h2 className="text-2xl font-bold mt-6 text-white">Comment nous utilisons les informations collectées</h2>
         <p>
           Comme nous ne collectons aucune information, nous ne les utilisons d'aucune manière. Votre vie privée est entièrement respectée.
@@ -28,7 +31,7 @@ const PrivacyPolicy: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         <p>
           Lion Meme Generator a la discrétion de mettre à jour cette politique de confidentialité à tout moment. Lorsque nous le ferons, nous réviserons la date de mise à jour au bas de cette page. Nous encourageons les utilisateurs à consulter fréquemment cette page pour toute modification afin de rester informés de la manière dont nous aidons à protéger les informations personnelles que nous collectons.
         </p>
-        <p>Dernière mise à jour : 29 décembre 2025</p>
+        <p>Dernière mise à jour : 30 octobre 2026</p>
       </div>
     </div>
   );

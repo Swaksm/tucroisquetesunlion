@@ -102,7 +102,7 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, as
 
 
       // --- 4. Filigrane (Watermark) ---
-      const watermarkText = 'lion-meme.com';
+      const watermarkText = 'swaks.org/lion-meme';
       ctx.save();
       ctx.font = 'bold 20px Arial, sans-serif';
       ctx.textAlign = 'right';

@@ -4,12 +4,12 @@ import { LionOption } from './types';
 export const PREDEFINED_LIONS: LionOption[] = [
   {
     id: 'lion-funny',
-    url: '/lion-2.jpg', // Fierce Lion (local)
+    url: `${import.meta.env.BASE_URL}lion-2.jpg`, // Fierce Lion (local)
     name: 'Lion "Alpha"'
   },
   {
     id: 'lion-arms',
-    url: '/lion-1.jpg', // Funny/Standing Lion (local)
+    url: `${import.meta.env.BASE_URL}lion-1.jpg`, // Funny/Standing Lion (local)
     name: 'Lion "avec des bras"'
   }
 ];
