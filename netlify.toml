@@ -4,6 +4,13 @@
   command = "echo 'Site déplacé vers swaks.org/lion-meme/'"
   publish = "redirect"
 
+# Fichier de validation Google Search Console (à garder) : servi tel quel
+[[redirects]]
+  from = "/google3e6c225100616257.html"
+  to = "/google3e6c225100616257.html"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "https://swaks.org/lion-meme/"
