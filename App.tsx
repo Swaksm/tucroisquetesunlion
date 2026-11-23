@@ -5,6 +5,8 @@ import MemeCanvas from './components/MemeCanvas';
 import { Upload, Download, Check, Image as ImageIcon, Type, Rocket, RefreshCw, Plus, Share2 } from 'lucide-react';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import LegalNotice from './components/LegalNotice';
+import AboutSection from './components/AboutSection';
+import { T } from './i18n';
 
 type Page = 'main' | 'privacy' | 'legal';
 
@@ -80,11 +82,11 @@ const MainContent: React.FC = () => {
           files: [file],
         });
       } catch (error) {
-        console.error('Erreur lors du partage:', error);
+        console.error('Share error:', error);
       }
     } else {
       // Fallback for browsers that don't support sharing files
-      alert('La fonctionnalité de partage n\'est pas supportée sur ce navigateur.');
+      alert(T.shareUnsupported);
     }
   };
 
@@ -101,20 +103,20 @@ const MainContent: React.FC = () => {
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span>
-              <h2 className="text-xl font-bold uppercase tracking-tight">Choisis le format</h2>
+              <h2 className="text-xl font-bold uppercase tracking-tight">{T.stepFormat}</h2>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setAspectRatio('square')}
                 className={`py-3 px-4 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${aspectRatio === 'square' ? 'bg-orange-500 text-white' : 'bg-zinc-800 hover:bg-zinc-700'}`}
               >
-                Carré
+                {T.square}
               </button>
               <button
                 onClick={() => setAspectRatio('rectangle')}
                 className={`py-3 px-4 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${aspectRatio === 'rectangle' ? 'bg-orange-500 text-white' : 'bg-zinc-800 hover:bg-zinc-700'}`}
               >
-                Rectangle
+                {T.rectangle}
               </button>
             </div>
           </section>
@@ -123,7 +125,7 @@ const MainContent: React.FC = () => {
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
-              <h2 className="text-xl font-bold uppercase tracking-tight">Choisis ton Lion</h2>
+              <h2 className="text-xl font-bold uppercase tracking-tight">{T.stepLion}</h2>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {/* The two predefined lions */}
@@ -135,7 +137,7 @@ const MainContent: React.FC = () => {
                     selectedLion === lion.url && selectedLion !== customLionUrl ? 'border-orange-500 scale-105 shadow-lg' : 'border-transparent grayscale hover:grayscale-0'
                   }`}
                 >
-                  <img src={lion.url} alt={lion.name} className="w-full h-full object-cover" />
+                  <img src={lion.url} alt={lion.id === 'lion-funny' ? T.lionAlpha : T.lionArms} className="w-full h-full object-cover" />
                   {selectedLion === lion.url && selectedLion !== customLionUrl && (
                     <div className="absolute top-1 right-1 bg-orange-500 rounded-full p-1">
                       <Check size={12} className="text-white" />
@@ -166,7 +168,7 @@ const MainContent: React.FC = () => {
                 ) : (
                   <>
                     <Plus className="text-zinc-500 group-hover:text-zinc-300" size={24} />
-                    <span className="text-[9px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300">Custom</span>
+                    <span className="text-[9px] uppercase font-bold text-zinc-500 group-hover:text-zinc-300">{T.custom}</span>
                   </>
                 )}
                 <input 
@@ -184,7 +186,7 @@ const MainContent: React.FC = () => {
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span>
-              <h2 className="text-xl font-bold uppercase tracking-tight">Ta "vraie" nature</h2>
+              <h2 className="text-xl font-bold uppercase tracking-tight">{T.stepNature}</h2>
             </div>
             <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-zinc-700 rounded-xl cursor-pointer hover:border-zinc-500 hover:bg-zinc-800/50 transition-all overflow-hidden relative">
               {userImageUrl ? (
@@ -192,11 +194,11 @@ const MainContent: React.FC = () => {
               ) : (
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <Upload className="w-8 h-8 mb-3 text-zinc-500" />
-                  <p className="mb-2 text-sm text-zinc-400">Upload ton image ici</p>
+                  <p className="mb-2 text-sm text-zinc-400">{T.upload}</p>
                 </div>
               )}
               <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${userImageUrl ? 'opacity-100' : 'opacity-0'}`}>
-                <span className="bg-zinc-100 text-zinc-950 px-4 py-2 rounded-lg font-bold text-sm uppercase">Changer l'image</span>
+                <span className="bg-zinc-100 text-zinc-950 px-4 py-2 rounded-lg font-bold text-sm uppercase">{T.change}</span>
               </div>
               <input type="file" className="hidden" accept="image/*" onChange={handleUserImageUpload} />
             </label>
@@ -206,11 +208,11 @@ const MainContent: React.FC = () => {
           <section className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-4">
               <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span>
-              <h2 className="text-xl font-bold uppercase tracking-tight">L'élément textuel</h2>
+              <h2 className="text-xl font-bold uppercase tracking-tight">{T.stepText}</h2>
             </div>
             <input
               type="text"
-              placeholder="Ex: UN CHATON"
+              placeholder={T.placeholder}
               maxLength={30}
               value={memeText}
               onChange={handleTextChange}
@@ -227,7 +229,7 @@ const MainContent: React.FC = () => {
               }`}
             >
               <Rocket size={24} />
-              Générer le mème
+              {T.generate}
             </button>
           </section>
         </div>
@@ -238,11 +240,11 @@ const MainContent: React.FC = () => {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <span className="bg-zinc-100 text-zinc-950 w-8 h-8 rounded-full flex items-center justify-center font-bold">5</span>
-                <h2 className="text-xl font-bold uppercase tracking-tight">Aperçu</h2>
+                <h2 className="text-xl font-bold uppercase tracking-tight">{T.preview}</h2>
               </div>
               {isGenerated && (
                 <span className="flex items-center gap-1 text-green-500 text-xs font-bold uppercase animate-pulse">
-                   Prêt <Check size={12}/>
+                   {T.ready} <Check size={12}/>
                 </span>
               )}
             </div>
@@ -260,7 +262,7 @@ const MainContent: React.FC = () => {
                   <div className="flex flex-col items-center gap-4">
                     <RefreshCw className="text-orange-500 opacity-50" size={32} />
                     <p className="text-zinc-400 font-bold uppercase text-sm tracking-widest">
-                      Clique sur "Générer" pour voir le mème
+                      {T.clickGenerate}
                     </p>
                   </div>
                 </div>
@@ -278,7 +280,7 @@ const MainContent: React.FC = () => {
                 }`}
               >
                 <Download size={24} />
-                Télécharger
+                {T.download}
               </button>
               {showShare && (
                 <button
@@ -291,7 +293,7 @@ const MainContent: React.FC = () => {
                   }`}
                 >
                   <Share2 size={24} />
-                  Partager
+                  {T.share}
                 </button>
               )}
             </div>
@@ -304,45 +306,7 @@ const MainContent: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* Texte lu par les moteurs de recherche : le principe, la méthode, des idées et la FAQ (même FAQ que le JSON-LD de index.html) */}
-      <section className="w-full mt-20 text-zinc-500 text-left leading-relaxed">
-        <h2 className="text-2xl font-bold text-zinc-300 mb-4">Le meme « Tu crois que t'es un lion mais t'es un… »</h2>
-        <p className="mb-4">
-          Le principe tient en deux images. En haut, un lion majestueux : ce que tu crois être. En dessous, une photo qui montre ce que tu es vraiment : un chaton mouillé, un pigeon, ou toi un lundi matin. La phrase fait le lien, « Tu crois que t'es un lion mais t'es un… », et c'est le décalage entre les deux qui fait rire.
-        </p>
-        <p className="mb-4">
-          Il marche pour se moquer gentiment d'un ami qui se la raconte, mais encore mieux en autodérision : ta photo de vacances ratée, ton chat, ton bureau en désordre.
-        </p>
-
-        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Faire ton meme en 5 étapes</h3>
-        <ol className="list-decimal pl-6 space-y-1">
-          <li><strong>Le format</strong> : carré pour Instagram ou WhatsApp, rectangle pour X ou Discord.</li>
-          <li><strong>Le lion</strong> : choisis le lion « Alpha » ou le lion « avec des bras », ou importe ta propre image.</li>
-          <li><strong>Ta vraie nature</strong> : ajoute la photo qui ira en dessous.</li>
-          <li><strong>Le texte</strong> : écris la fin de la phrase, 30 caractères maximum.</li>
-          <li><strong>Générer</strong>, puis télécharge le meme en PNG ou partage-le directement depuis ton téléphone.</li>
-        </ol>
-
-        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Idées de chutes</h3>
-        <p className="mb-2">Tu crois que t'es un lion mais t'es…</p>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>un chaton mouillé</li>
-          <li>un pigeon qui vole des frites</li>
-          <li>un hamster dans sa roue</li>
-          <li>un paresseux le lundi</li>
-          <li>un caniche avec un nœud</li>
-        </ul>
-
-        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Questions fréquentes</h3>
-        <h4 className="font-bold text-zinc-400 mt-4">Comment faire un meme « Tu crois que t'es un lion » ?</h4>
-        <p>Choisis le format, un lion (ou le tien), ajoute la photo de ta « vraie nature » et le texte, puis clique sur « Générer le mème ». Tu peux ensuite le télécharger en PNG ou le partager.</p>
-        <h4 className="font-bold text-zinc-400 mt-4">Le générateur de meme lion est-il gratuit ?</h4>
-        <p>Oui, il est entièrement gratuit et sans inscription.</p>
-        <h4 className="font-bold text-zinc-400 mt-4">Je peux utiliser ma propre image de lion ?</h4>
-        <p>Oui : dans l'étape « Choisis ton Lion », importe n'importe quelle image depuis ton appareil.</p>
-        <h4 className="font-bold text-zinc-400 mt-4">Mes photos sont-elles envoyées sur un serveur ?</h4>
-        <p>Non. Le meme est assemblé directement dans ton navigateur : tes images ne quittent jamais ton appareil.</p>
-      </section>
+      <AboutSection />
     </>
   );
 }
@@ -369,7 +333,8 @@ const App: React.FC = () => {
         <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2 italic text-zinc-100">
           Lion Meme <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-200">Generator</span>
         </h1>
-        <p className="text-zinc-400 text-lg">"Tu crois que t'es un lion mais t'es un..."</p>
+        <p className="text-zinc-400 text-lg">{T.subtitle}</p>
+        <p className="mt-3 text-sm"><a href={T.otherLang.href} hrefLang={T.otherLang.hreflang} lang={T.otherLang.hreflang} className="text-zinc-500 underline hover:text-zinc-300">{T.otherLang.label}</a></p>
       </header>
 
       <main className="w-full">
@@ -379,20 +344,20 @@ const App: React.FC = () => {
       <footer className="mt-20 py-8 border-t border-zinc-800 w-full text-center">
         <div className="text-zinc-500 text-xs">
           <button onClick={() => setPage('privacy')} className="hover:text-zinc-300 transition-colors mx-2">
-            Politique de Confidentialité
+            {T.privacy}
           </button>
           |
           <button onClick={() => setPage('legal')} className="hover:text-zinc-300 transition-colors mx-2">
-            Mentions Légales
+            {T.legal}
           </button>
         </div>
         <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] font-medium opacity-50 mt-4">
           Lion Meme Generator — © 2025-2026
         </p>
         <p className="text-zinc-500 text-xs mt-3">
-          Un projet de <a href="https://swaks.org/fr/" className="underline hover:text-zinc-300">Matthieu Izac</a> ·{' '}
-          <a href="https://swaks.org/fr/projects/lion-meme.html" className="underline hover:text-zinc-300">À propos</a> ·{' '}
-          <a href="https://github.com/Swaksm/tucroisquetesunlion" className="underline hover:text-zinc-300" rel="noopener">Code source</a>
+          {T.by} <a href={T.home} className="underline hover:text-zinc-300">Matthieu Izac</a> ·{' '}
+          <a href={T.project} className="underline hover:text-zinc-300">{T.about}</a> ·{' '}
+          <a href="https://github.com/Swaksm/tucroisquetesunlion" className="underline hover:text-zinc-300" rel="noopener">{T.source}</a>
         </p>
       </footer>
     </div>

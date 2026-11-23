@@ -1,0 +1,78 @@
+// Langue fixée par la page : /lion-meme/ (fr) ou /lion-meme/en/ (en), via <html lang>.
+export type Lang = 'fr' | 'en';
+export const LANG: Lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+
+const fr = {
+  subtitle: '"Tu crois que t\'es un lion mais t\'es un..."',
+  otherLang: { label: 'English', href: '/lion-meme/en/', hreflang: 'en' },
+  stepFormat: 'Choisis le format',
+  square: 'Carré',
+  rectangle: 'Rectangle',
+  stepLion: 'Choisis ton Lion',
+  lionAlpha: 'Lion "Alpha"',
+  lionArms: 'Lion "avec des bras"',
+  custom: 'Custom',
+  stepNature: 'Ta "vraie" nature',
+  upload: 'Upload ton image ici',
+  change: "Changer l'image",
+  stepText: "L'élément textuel",
+  placeholder: 'Ex: UN CHATON',
+  generate: 'Générer le mème',
+  preview: 'Aperçu',
+  ready: 'Prêt',
+  clickGenerate: 'Clique sur "Générer" pour voir le mème',
+  download: 'Télécharger',
+  share: 'Partager',
+  shareUnsupported: "La fonctionnalité de partage n'est pas supportée sur ce navigateur.",
+  canvasPlaceholder: 'Votre image ici',
+  // Texte du meme : ligne 1, puis début de la ligne 2 suivi de ce que l'utilisateur écrit
+  memeLine1: "TU CROIS QUE T'ES UN LION",
+  memeLine2: "MAIS T'ES",
+  privacy: 'Politique de Confidentialité',
+  legal: 'Mentions Légales',
+  by: 'Un projet de',
+  about: 'À propos',
+  source: 'Code source',
+  home: 'https://swaks.org/fr/',
+  project: 'https://swaks.org/fr/projects/lion-meme.html',
+  back: '← Retour',
+};
+
+type Dict = typeof fr;
+
+const en: Dict = {
+  subtitle: '"You think you\'re a lion but you\'re a..."',
+  otherLang: { label: 'Français', href: '/lion-meme/', hreflang: 'fr' },
+  stepFormat: 'Pick the format',
+  square: 'Square',
+  rectangle: 'Rectangle',
+  stepLion: 'Pick your lion',
+  lionAlpha: '"Alpha" lion',
+  lionArms: 'Lion "with arms"',
+  custom: 'Custom',
+  stepNature: 'Your "real" nature',
+  upload: 'Upload your picture here',
+  change: 'Change picture',
+  stepText: 'The punchline',
+  placeholder: 'E.g. A KITTEN',
+  generate: 'Generate the meme',
+  preview: 'Preview',
+  ready: 'Ready',
+  clickGenerate: 'Click "Generate" to see the meme',
+  download: 'Download',
+  share: 'Share',
+  shareUnsupported: 'Sharing is not supported in this browser.',
+  canvasPlaceholder: 'Your picture here',
+  memeLine1: "YOU THINK YOU'RE A LION",
+  memeLine2: "BUT YOU'RE",
+  privacy: 'Privacy policy',
+  legal: 'Legal notice',
+  by: 'A project by',
+  about: 'About',
+  source: 'Source code',
+  home: 'https://swaks.org/',
+  project: 'https://swaks.org/projects/lion-meme.html',
+  back: '← Back',
+};
+
+export const T: Dict = LANG === 'en' ? en : fr;

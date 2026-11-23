@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { CANVAS_WIDTH, CANVAS_SQUARE_HEIGHT, CANVAS_RECT_HEIGHT } from '../constants';
 import { AspectRatio } from '../types';
+import { T } from '../i18n';
 
 interface MemeCanvasProps {
   lionUrl: string;
@@ -56,7 +57,7 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, as
           ctx.fillStyle = '#52525b';
           ctx.font = '24px Inter';
           ctx.textAlign = 'center';
-          ctx.fillText('Votre image ici', CANVAS_WIDTH / 2, (canvasHeight * 3) / 4);
+          ctx.fillText(T.canvasPlaceholder, CANVAS_WIDTH / 2, (canvasHeight * 3) / 4);
         }
       } else {
         // --- RECTANGLE DRAWING ---
@@ -71,12 +72,12 @@ const MemeCanvas: React.FC<MemeCanvasProps> = ({ lionUrl, userImageUrl, text, as
           ctx.fillStyle = '#52525b';
           ctx.font = '24px Inter';
           ctx.textAlign = 'center';
-          ctx.fillText('Votre image ici', (CANVAS_WIDTH * 3) / 4, canvasHeight / 2);
+          ctx.fillText(T.canvasPlaceholder, (CANVAS_WIDTH * 3) / 4, canvasHeight / 2);
         }
       }
 
       // 3. Draw Text Overlay
-      const fullText = `TU CROIS QUE T'ES UN LION\nMAIS T'ES ${text.toUpperCase() || '...'}`;
+      const fullText = `${T.memeLine1}\n${T.memeLine2} ${text.toUpperCase() || '...'}`;
       ctx.font = `bold ${isSquare ? '70px' : '50px'} Impact, sans-serif`;
       ctx.fillStyle = 'white';
       ctx.strokeStyle = 'black';
