@@ -304,21 +304,43 @@ const MainContent: React.FC = () => {
           </div>
         </div>
       </div>
-      <section className="w-full mt-20 text-zinc-600 text-left">
-        <h2 className="text-2xl font-bold text-zinc-400 mb-4">Comment utiliser notre générateur de lion-meme ?</h2>
+      {/* Texte lu par les moteurs de recherche : le principe, la méthode, des idées et la FAQ (même FAQ que le JSON-LD de index.html) */}
+      <section className="w-full mt-20 text-zinc-500 text-left leading-relaxed">
+        <h2 className="text-2xl font-bold text-zinc-300 mb-4">Le meme « Tu crois que t'es un lion mais t'es un… »</h2>
         <p className="mb-4">
-          Libérez votre créativité avec notre <strong>générateur de meme gratuit</strong>. Le concept est simple : une image de lion majestueux, et en dessous, une photo qui révèle une réalité plus... modeste. C'est l'outil parfait pour une touche d'<strong>humour lion</strong> et d'autodérision. Notre <strong>Lion meme maker</strong> vous permet de créer ces memes viraux en quelques clics.
+          Le principe tient en deux images. En haut, un lion majestueux : ce que tu crois être. En dessous, une photo qui montre ce que tu es vraiment : un chaton mouillé, un pigeon, ou toi un lundi matin. La phrase fait le lien, « Tu crois que t'es un lion mais t'es un… », et c'est le décalage entre les deux qui fait rire.
         </p>
-        <h3 className="text-xl font-bold text-zinc-500 mb-2">Pourquoi le meme du lion est-il si populaire ?</h3>
-        <p>
-          Ce meme joue sur le contraste entre l'image que l'on veut projeter (le lion, symbole de force et de majesté) et la réalité, souvent plus cocasse. C'est un excellent moyen de partager une tranche de vie avec humour. Utilisez notre <strong>générateur de meme gratuit</strong> pour surprendre vos amis !
+        <p className="mb-4">
+          Il marche pour se moquer gentiment d'un ami qui se la raconte, mais encore mieux en autodérision : ta photo de vacances ratée, ton chat, ton bureau en désordre.
         </p>
-        <h3 className="text-xl font-bold text-zinc-500 mt-8 mb-2">Questions fréquentes</h3>
-        <h4 className="font-bold text-zinc-500 mt-4">Comment faire un meme « Tu crois que t'es un lion » ?</h4>
+
+        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Faire ton meme en 5 étapes</h3>
+        <ol className="list-decimal pl-6 space-y-1">
+          <li><strong>Le format</strong> : carré pour Instagram ou WhatsApp, rectangle pour X ou Discord.</li>
+          <li><strong>Le lion</strong> : choisis le lion « Alpha » ou le lion « avec des bras », ou importe ta propre image.</li>
+          <li><strong>Ta vraie nature</strong> : ajoute la photo qui ira en dessous.</li>
+          <li><strong>Le texte</strong> : écris la fin de la phrase, 30 caractères maximum.</li>
+          <li><strong>Générer</strong>, puis télécharge le meme en PNG ou partage-le directement depuis ton téléphone.</li>
+        </ol>
+
+        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Idées de chutes</h3>
+        <p className="mb-2">Tu crois que t'es un lion mais t'es…</p>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>un chaton mouillé</li>
+          <li>un pigeon qui vole des frites</li>
+          <li>un hamster dans sa roue</li>
+          <li>un paresseux le lundi</li>
+          <li>un caniche avec un nœud</li>
+        </ul>
+
+        <h3 className="text-xl font-bold text-zinc-400 mt-8 mb-2">Questions fréquentes</h3>
+        <h4 className="font-bold text-zinc-400 mt-4">Comment faire un meme « Tu crois que t'es un lion » ?</h4>
         <p>Choisis le format, un lion (ou le tien), ajoute la photo de ta « vraie nature » et le texte, puis clique sur « Générer le mème ». Tu peux ensuite le télécharger en PNG ou le partager.</p>
-        <h4 className="font-bold text-zinc-500 mt-4">Le générateur de meme lion est-il gratuit ?</h4>
+        <h4 className="font-bold text-zinc-400 mt-4">Le générateur de meme lion est-il gratuit ?</h4>
         <p>Oui, il est entièrement gratuit et sans inscription.</p>
-        <h4 className="font-bold text-zinc-500 mt-4">Mes photos sont-elles envoyées sur un serveur ?</h4>
+        <h4 className="font-bold text-zinc-400 mt-4">Je peux utiliser ma propre image de lion ?</h4>
+        <p>Oui : dans l'étape « Choisis ton Lion », importe n'importe quelle image depuis ton appareil.</p>
+        <h4 className="font-bold text-zinc-400 mt-4">Mes photos sont-elles envoyées sur un serveur ?</h4>
         <p>Non. Le meme est assemblé directement dans ton navigateur : tes images ne quittent jamais ton appareil.</p>
       </section>
     </>
